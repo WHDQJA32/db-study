@@ -1,0 +1,11 @@
+SELECT *
+FROM emp;
+
+SELECT  EMPNO,
+        ENAME,
+        TO_CHAR(HIREDATE, 'YYYY-MM-DD')HIREDATE,
+        TO_CHAR((SAL*12)+COMM, '$999,999')SAL,
+        TO_CHAR(((SAL*12)+COMM)*1.15,  '$999,999') "15%인상"
+
+FROM emp
+WHERE COMM IS NOT NULL;
