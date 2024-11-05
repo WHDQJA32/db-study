@@ -1,0 +1,70 @@
+--복수행 함수
+
+COUNT(대상) 갯수
+
+SELECT COUNT(*)
+FROM emp;
+
+SELECT COUNT(empno), COUNT(*)
+FROM emp;
+
+SELECT COUNT(JOB), COUNT(MGR), COUNT(HIREDATE), COUNT(COMM)--NULL는 적용안해줌.
+FROM emp;
+
+SELECT SUM(SAL), COUNT(*) --SUM 총합
+FROM emp;
+
+--10, 20번 부서 다니는 사람이 총 급여와 사원 수
+SELECT COUNT(*), SUM(SAL)
+FROM emp
+WHERE DEPTNO IN (10, 20);
+
+SELECT 
+        AVG(HEIGHT), 
+        MAX(HEIGHT), 
+        MIN(HEIGHT), 
+        STDDEV(HEIGHT), 
+        VARIANCE(HEIGHT)
+        --단일행 함수 XX
+FROM student;
+
+--STUDENT 평균 키!
+--전체 평균키 X, 각 학년별 평균 키!
+
+SELECT '1학년' , AVG(HEIGHT) 평균키
+FROM student
+WHERE GRADE=1
+UNION ALL
+SELECT '2학년' , AVG(HEIGHT)
+FROM student
+WHERE GRADE=2
+UNION ALL
+SELECT '3학년' ,AVG(HEIGHT)
+FROM student
+WHERE GRADE=3
+UNION ALL
+SELECT '4학년' ,AVG(HEIGHT)
+FROM student
+WHERE GRADE=4;
+
+SELECT
+FROM
+WHERE
+GROUP BY
+ORDER BY;
+
+--GROUP BY에 명시된 컬럼은 사용가능!!!
+SELECT GRADE, AVG(HEIGHT) --GROUP BY 에 들어간 컬럼 GRADE 사용가능!
+FROM STUDENT
+GROUP BY GRADE; --GROUP BY 에 들어간 컬럼은 쓸수 있다!
+
+SELECT STUDNO, AVG(HEIGHT) 
+FROM STUDENT
+GROUP BY STUDNO; --중복이 없어서 그룹을 지을순 없을 때, 전체 각자 출력된다.
+
+SELECT GRADE, AVG(HEIGHT) HEIGHT
+FROM STUDENT
+WHERE GRADE IN(1,2,3)
+GROUP BY GRADE
+--ORDER BY 2 ; --컬럼 순서 숫자로 정렬가능
+ORDER BY HEIGHT ; --컬럼 별칭으로 정렬 시켰다.
