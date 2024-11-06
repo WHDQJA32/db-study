@@ -68,3 +68,104 @@ WHERE GRADE IN(1,2,3)
 GROUP BY GRADE
 --ORDER BY 2 ; --컬럼 순서 숫자로 정렬가능
 ORDER BY HEIGHT ; --컬럼 별칭으로 정렬 시켰다.
+
+SELECT...
+FROM...
+WHERE...
+GROUP BY
+HAVING
+ORDER BY;
+
+SELECT deptno, AVG(SAL)
+FROM emp
+--WHERE AVG(SAL) >= 2000 --웨어 절에서 복수형 함수 사용못한다.
+GROUP BY deptno
+HAVING AVG(SAL) >= 2000 --복수형 함수 해빙써야한다.
+;
+
+1) 급여가 1500 이상인 직원들만 대상으로, 부서별 평균 급여
+
+SELECT deptno, avg(sal)
+FROM emp
+where sal >= 1500
+group by deptno
+;
+
+2) 부서별 평균 급여가 1500 이상인 경우만, 부서별 평균 급여 보여주기
+
+SELECT deptno, avg(sal)
+FROM emp
+group by deptno
+having avg(sal) >= 1500
+;
+
+select *
+from student;
+
+select grade, avg(weight)
+from student
+group by grade
+having avg(weight) >= 65
+;
+
+select grade, avg(weight)
+from student
+--where grade not in (4)
+where grade <> 4
+group by grade
+having avg(weight) >= 65
+;
+
+SELECT deptno, job, ROUND(AVG(SAL), 1)
+FROM emp
+GROUP BY ROLLUP(deptno, job);
+
+SELECT deptno, job, ROUND(AVG(SAL), 1)
+FROM emp
+GROUP BY deptno, job;
+
+GROUP BY ROLLUP(deptno, job);
+1) deptno, job 그룹화
+2) deptno 그룹화 계
+3) () 그룹화 계
+
+GROUP BY ROLLUP( (deptno, job) );
+1) deptno, job 그룹화
+2) () 그룹화 계
+
+GROUP BY ROLLUP(deptno, job, mgr);
+1) deptno, job, mgr 그룹화
+2) deptno ,job 계
+3) deptno 계
+4) ()계
+
+GROUP BY ROLLUP(deptno, (job, mgr));
+1) deptno, job, mgr 그룹화
+2) deptno 계
+3) ()계
+
+SELECT deptno, job, mgr, ROUND(AVG(SAL), 1)
+FROM emp
+GROUP BY ROLLUP(deptno, job, mgr);
+
+--RANK DENSE RANK
+
+순위 RANK() OVER (ORDER BY 정렬기준)
+그룹단위로 순위 RANK() OVER (PARTITION BY 기준 ORDER BY 정렬기준)
+                             --GROUP BY
+SELECT ename, sal, 
+        rank()over (order by sal desc), --샐 기준으로 순위를 매긴다.
+        DENSE_rank()over (order by sal desc)          
+FROM emp;
+--order by sal;
+
+SELECT 
+    name,
+    height,
+    RANK() OVER (order by height desc) 순위1,--공동순위 사람 숫자 만큼 차지하고 그다음 순위를 보여준다.
+    DENSE_RANK() OVER (order by height desc) 순위2,
+    GRADE,
+    RANK() OVER (PARTITION BY GRADE order by height desc) 순위3,
+    DENSE_RANK() OVER (PARTITION BY GRADE order by height desc) 순위4
+FROM student
+ORDER BY GRADE, HEIGHT DESC;
