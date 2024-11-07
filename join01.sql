@@ -111,13 +111,15 @@ FROM CUSTOMER C, GIFT G
 WHERE C.POINT BETWEEN G.G_START AND G.G_END; --C테이블 포인트를 G테이블 스타트 와 엔드 컬럼사이로 넣겠다.
 
 --INNER JOIN
+--INNER JOIN(null삭제)VS OUTER JOIN(null 포함)
 
 SELECT *
 FROM STUDENT S, PROFESSOR p
 WHERE S.profno = P.profno;
 
-
+--뒤에 붙는 테이블이나 컬럼에 (+)!!!!!!!!!!!!!
 --OUTER JOIN
+--INNER JOIN(null삭제)VS OUTER JOIN(null 포함)
 
 SELECT *
 FROM STUDENT S, PROFESSOR p
@@ -126,3 +128,14 @@ WHERE S.profno = P.profno(+);
 SELECT *
 FROM STUDENT S, PROFESSOR p
 WHERE P.profno = S.profno(+);
+
+--EMP테이블에 있는 사번, 이름, 상사의 사번, 상사의 이름 출력하기!
+
+SELECT *
+FROM EMP;
+
+SELECT E.EMPNO 사번, E.ENAME 이름, E1.EMPNO 상사사번, E1.ENAME 상사이름
+FROM EMP E, EMP E1
+WHERE E.MGR = E1.EMPNO
+ORDER BY 사번;
+
