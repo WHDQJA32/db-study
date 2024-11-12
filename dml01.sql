@@ -31,7 +31,23 @@ VALUES (6, '이름6');
 INSERT INTO new_table
 VALUES (7, '이름7', null);    
 
----
+
+---여러개를 동시에 삽입 (저장) INSERT ALL
+
+INSERT ALL
+INTO tt02 VALUES (7, '이름7', NULL)
+INTO tt02 VALUES (8, '이름7', NULL)
+INTO tt02 VALUES (9, '이름7', NULL)
+INTO tt02 VALUES (10, '이름7', NULL)
+SELECT * FROM DUAL;
+
+SELECT * FROM TT02;
+
+INSERT INTO tt02
+SELECT 11, '샘플', SYSDATE FROM DUAL;
+
+INSERT INTO tt02 --TT02테이블에 DEPT테이블에 DEPTNO, LOC, SYSDATE 컬럼을 복사한다.(단 타입이 맞아야함)
+SELECT DEPTNO, LOC, SYSDATE FROM DEPT;
 
 INSERT INTO tt02 (no)
 VALUES (1);
