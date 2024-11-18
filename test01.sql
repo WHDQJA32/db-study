@@ -1,0 +1,48 @@
+1번
+
+CREATE TABLE T_PERSON_INFO
+(   
+    NO NUMBER(8) PRIMARY KEY,
+    NAME VARCHAR2(20),
+    AGE NUMBER(2),
+    JG VARCHAR2(20)
+);
+DROP TABLE T_PERSON_INFO;
+
+SELECT * FROM T_PERSON_INFO;
+
+INSERT INTO T_PERSON_INFO (no, name, age, jg)VALUES (20210034, '이상형', 21, '법학과');
+INSERT INTO T_PERSON_INFO (no, name, age, jg)VALUES (20220011, '김건우', 24, '물리학과');
+INSERT INTO T_PERSON_INFO (no, name, age, jg)VALUES (20240109, '전지훈', 20, '컴퓨터공학과');
+INSERT INTO T_PERSON_INFO (no, name, age, jg)VALUES (20230002, '강순구', 21, '건축학과');
+
+2번
+
+CREATE TABLE board_list
+(   
+    board_list_id NUMBER(5) PRIMARY KEY,
+    title VARCHAR2(100) NOT NULL,
+    content VARCHAR2(2000),
+    writer VARCHAR2(60) NOT NULL,
+    create_time NUMBER(13) NOT NULL
+);
+
+3번
+
+SELECT E.EMPNO,E.ENAME, E.SAL, D.DNAME, D.LOC
+FROM EMP E, DEPT D
+WHERE E.SAL >= 2000
+ORDER BY E.SAL DESC;
+
+4번
+
+COMMIT;
+ROLLBACK;
+
+5번
+
+1) DBMS 서비스 명 ORCL
+2) IP 주소 192.168.0.118
+3) PORT 번호 1521
+4) 계정명 scott
+5) 비밀번호 tiger
